@@ -1,0 +1,63 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+  r2dbc:
+    url: ${DATABASE_R2DBC_URL:r2dbc:postgresql://localhost:5432/orgbridge}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:root}
+
+  flyway:
+    enabled: true
+    url: ${DATABASE_JDBC_URL:jdbc:postgresql://localhost:5432/orgbridge}
+    user: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:root}
+
+  data:
+    redis:
+      url: ${REDIS_URL:redis://localhost:6379}
+      connect-timeout: 2s
+      timeout: 2s
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:your-email@gmail.com}
+    password: ${MAIL_PASSWORD:your-app-password}
+    protocol: smtp
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+
+app:
+  frontend:
+    url: ${FRONTEND_URL:http://localhost:5173}
+  jwt:
+    secret: ${JWT_SECRET:orgbridge-local-development-jwt-secret-change-before-production}
+    expiration: ${JWT_EXPIRATION:3600000}
+    refresh-expiration: ${JWT_REFRESH_EXPIRATION:604800000}
+  redis:
+    prefix: "${REDIS_PREFIX:orgbridge:dev:sessions:}"
+    session-ttl-seconds: ${REDIS_SESSION_TTL_SECONDS:7200}
+  salesforce:
+    production: ${SALESFORCE_PRODUCTION}
+    sandbox: ${SALESFORCE_SANDBOX}
+    api-version: ${SALESFORCE_API_VERSION:67.0}
+  integration:
+    api-key: ${ORGBRIDGE_INTEGRATION_API_KEY}
+  operations:
+    worker-enabled: ${OPERATIONS_WORKER_ENABLED:true}
+    worker-concurrency: ${OPERATIONS_WORKER_CONCURRENCY:2}
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  health:
+    mail:
+      enabled: false

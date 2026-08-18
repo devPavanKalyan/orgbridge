@@ -1,0 +1,46 @@
+services:
+  - type: web
+    name: metabird-backend
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: Dockerfile
+    healthCheckPath: /actuator/health
+    autoDeployTrigger: checksPass
+
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+
+      - key: DATABASE_R2DBC_URL
+        sync: false
+      - key: DATABASE_JDBC_URL
+        sync: false
+      - key: DATABASE_USERNAME
+        sync: false
+      - key: DATABASE_PASSWORD
+        sync: false
+      - key: ORGBRIDGE_INTEGRATION_API_KEY
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: REDIS_PREFIX
+        value: "orgbridge:prod:sessions:"
+      - key: REDIS_SESSION_TTL_SECONDS
+        value: "7200"
+
+      - key: FRONTEND_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRATION
+        value: "3600000"
+      - key: JWT_REFRESH_EXPIRATION
+        value: "604800000"
+      - key: SALESFORCE_PRODUCTION
+        value: "https://login.salesforce.com/services/Soap/u/67.0"
+      - key: SALESFORCE_SANDBOX
+        value: "https://test.salesforce.com/services/Soap/u/67.0"
+
+      - key: JAVA_OPTS
+        value: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0"

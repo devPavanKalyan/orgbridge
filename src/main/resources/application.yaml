@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: orgbridge-orchestrator
+
+  data:
+    redis:
+      repositories:
+        enabled: false
+
+  main:
+    banner-mode: off
+    web-application-type: reactive
+
+server:
+  port: ${PORT:8080}
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO

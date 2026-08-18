@@ -1,0 +1,64 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+  r2dbc:
+    url: ${DATABASE_R2DBC_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+
+  flyway:
+    enabled: true
+    url: ${DATABASE_JDBC_URL}
+    user: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+
+  data:
+    redis:
+      url: ${REDIS_URL}
+      connect-timeout: 5s
+      timeout: 5s
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:your-email@gmail.com}
+    password: ${MAIL_PASSWORD:your-app-password}
+    protocol: smtp
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+app:
+  frontend:
+    url: ${FRONTEND_URL}
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration: ${JWT_EXPIRATION}
+    refresh-expiration: ${JWT_REFRESH_EXPIRATION}
+  redis:
+    prefix: ${REDIS_PREFIX}
+    session-ttl-seconds: ${REDIS_SESSION_TTL_SECONDS:7200}
+  salesforce:
+    production: ${SALESFORCE_PRODUCTION}
+    sandbox: ${SALESFORCE_SANDBOX}
+    api-version: ${SALESFORCE_API_VERSION:67.0}
+  integration:
+    api-key: ${ORGBRIDGE_INTEGRATION_API_KEY}
+  operations:
+    worker-enabled: ${OPERATIONS_WORKER_ENABLED:true}
+    worker-concurrency: ${OPERATIONS_WORKER_CONCURRENCY:4}
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+
+management:
+  health:
+    mail:
+      enabled: false
