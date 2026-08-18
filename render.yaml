@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: metabird-backend
+    name: orgbridge
     runtime: docker
     plan: free
     region: singapore
