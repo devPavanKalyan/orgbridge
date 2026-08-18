@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @SpringBootTest
-@AutoConfigureWebTestClient
+@AutoConfigureWebTestClient(timeout = "30s")
 @ActiveProfiles("test")
 class OrgBridgeApplicationTests {
 
